@@ -1,5 +1,6 @@
 package com.bank.payment_gateway.controller;
 
+import com.bank.payment_gateway.model.Card;
 import com.bank.payment_gateway.model.PaymentRequest;
 import com.bank.payment_gateway.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,4 +19,10 @@ public class PaymentController {
     public String makePayment(@RequestBody PaymentRequest paymentRequest){
         return paymentService.processPayment(paymentRequest);
     }
+
+    @PostMapping("/addcard")
+    public String addCard(@RequestBody Card card){
+        return paymentService.addNewCard(card);
+    }
+
 }

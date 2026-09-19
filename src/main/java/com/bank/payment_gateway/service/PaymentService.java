@@ -25,4 +25,12 @@ public class PaymentService {
         return "Payment succeeded!, deducted "+ paymentRequest.getAmount() +" successfully. The remaining balance is "+ card.getBalance();
     }
 
+    public String addNewCard(Card card){
+        if(cardRepository.existsById(card.getCardNumber())){
+            return "Failed: Card already exists";
+        }
+        cardRepository.save(card);
+        return "Success: New card added successfully!";
+    }
+
 }
