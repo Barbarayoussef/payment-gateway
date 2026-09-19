@@ -54,5 +54,8 @@ public class PaymentService {
     public List<Transaction> getAllTransactions() {
         return transactionRepository.findAll();
     }
+    public Card getCardDetails(String cardNumber) {
+        return cardRepository.findById(cardNumber).orElse(null);
+    }
 
 }
