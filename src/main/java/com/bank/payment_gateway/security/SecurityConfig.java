@@ -19,6 +19,11 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/payment/pay").hasAnyRole("MERCHANT", "ADMIN")
+
+                        // Sensitive operations are restricted to Admins only
+                        .requestMatchers("/api/payment/add-card", "/api/payment/transactions", "/api/payment/card/**").hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());
@@ -31,6 +36,12 @@ public class SecurityConfig {
                 .username("bank_admin")
                 .password("admin123")
                 .roles("ADMIN")
+                .build();
+
+        UserDetails merchant = User.withDefaultPasswordEncoder()
+                .username("merchant_user")
+                .password("merchant123")
+                .roles("MERCHANT")
                 .build();
 
         return new InMemoryUserDetailsManager(user);

@@ -11,6 +11,7 @@ import lombok.Data;
 @Table(name = "cards")
 @Data
 public class Card {
+    @Id
     @NotBlank(message = "Card number is required")
     private String cardNumber;
 
