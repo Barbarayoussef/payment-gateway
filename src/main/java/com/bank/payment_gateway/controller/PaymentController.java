@@ -2,12 +2,12 @@ package com.bank.payment_gateway.controller;
 
 import com.bank.payment_gateway.model.Card;
 import com.bank.payment_gateway.model.PaymentRequest;
+import com.bank.payment_gateway.model.Transaction;
 import com.bank.payment_gateway.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/payment")
@@ -23,6 +23,11 @@ public class PaymentController {
     @PostMapping("/addcard")
     public String addCard(@RequestBody Card card){
         return paymentService.addNewCard(card);
+    }
+
+    @GetMapping("/transactions")
+    public List<Transaction> getTransactions() {
+        return paymentService.getAllTransactions();
     }
 
 }
